@@ -2,11 +2,11 @@ import { Inter } from "next/font/google";
 import { useState } from "react";
 import { Image } from "next/image";
 import storage from "../firebaseConfig.js";
+import Upload from "@/components/Upload.js";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default function Home() {
-  console.log(storage);
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
   const [url, setUrl] = useState("");
@@ -17,7 +17,8 @@ export default function Home() {
   );
 
   const handleFile = (e) => {
-    setFile(e.target.files[0]);
+    console.log(e.target.files);
+    setFile(e.target.files);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,9 +59,10 @@ export default function Home() {
   };
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="container">
+      <Upload />
+      {/* <div className="container">
         <form onSubmit={handleSubmit}>
-          <input type="file" accept="image/*" onChange={handleFile} />
+          <input type="file" accept="image/*" multiple onChange={handleFile} />
           <input type="submit" />
           {loading && <p>Loading</p>}
           <p>{percent} "% done"</p>
@@ -71,8 +73,8 @@ export default function Home() {
             width={400}
             height={400}
           />
-        )} */}
-      </div>
+        )} 
+      </div> */}
       <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBall_%2528association_football%2529&psig=AOvVaw1B91QciNg1GtqmQqASTa6S&ust=1696873664382000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKitjJWB54EDFQAAAAAdAAAAABAE" />
     </div>
   );
